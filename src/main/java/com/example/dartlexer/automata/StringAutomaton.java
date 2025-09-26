@@ -1,8 +1,6 @@
 package com.example.dartlexer.automata;
 
-import com.example.dartlexer.Lexer;
-import com.example.dartlexer.Token;
-import com.example.dartlexer.TokenType;
+import com.example.dartlexer.*;
 
 public class StringAutomaton {
 

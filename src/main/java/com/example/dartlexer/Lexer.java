@@ -1,7 +1,6 @@
 package com.example.dartlexer;
 
 import com.example.dartlexer.automata.*;
-
 import java.util.*;
 import java.util.function.Function;
 
@@ -11,16 +10,25 @@ public class Lexer {
     private int line;
     private int column;
 
-    public static final Set<String> KEYWORDS = Set.of(
-            "abstract", "as", "assert", "async", "await", "break", "case", "catch",
-            "class", "const", "continue", "default", "deferred", "do", "dynamic",
-            "else", "enum", "export", "extends", "extension", "external", "factory",
-            "false", "final", "finally", "for", "Function", "get", "hide", "if",
-            "implements", "import", "in", "interface", "is", "late", "library",
-            "mixin", "new", "null", "on", "operator", "part", "required", "rethrow",
-            "return", "set", "show", "static", "super", "switch", "sync", "this",
-            "throw", "true", "try", "typedef", "var", "void", "while", "with", "yield"
-    );
+    private static final BinarySearchTree KEYWORDS = initKeywordTree();
+
+    private static BinarySearchTree initKeywordTree() {
+        BinarySearchTree tree = new BinarySearchTree();
+        String[] keywords = {
+                "abstract", "as", "assert", "async", "await", "break", "case", "catch",
+                "class", "const", "continue", "default", "deferred", "do", "dynamic",
+                "else", "enum", "export", "extends", "extension", "external", "factory",
+                "false", "final", "finally", "for", "Function", "get", "hide", "if",
+                "implements", "import", "in", "interface", "is", "late", "library",
+                "mixin", "new", "null", "on", "operator", "part", "required", "rethrow",
+                "return", "set", "show", "static", "super", "switch", "sync", "this",
+                "throw", "true", "try", "typedef", "var", "void", "while", "with", "yield"
+        };
+        for (String kw : keywords) {
+            tree.insert(kw);
+        }
+        return tree;
+    }
 
     private static final Map<Character, Function<Lexer, Token>> DISPATCH_TABLE = initDispatchTable();
 
